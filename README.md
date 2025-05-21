@@ -1,2 +1,0 @@
-# Basketball-Predictions
-NBA Playoffs
