@@ -64,8 +64,9 @@ def main():
                 data=game_log,
                 columns=["Team 1 Score", "Team 2 Score", "Winner"]
             )
-            df_2.style.apply(highlight_winners, axis=1)
-            st.dataframe(df_2.style.apply(highlight_winners, axis=1, args=(team1, team2)))
+            styled_df = df_2.style.apply(highlight_winners, axis=1, args=(team1, team2))
+
+            st.dataframe(styled_df)
 
 
             st.session_state["results"] = results
