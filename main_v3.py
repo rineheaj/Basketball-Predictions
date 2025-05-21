@@ -6,7 +6,13 @@ from sim_core import (
 
 
 def main():
-    st.title("🏀 NBA Simulation Predictor")
+    st.markdown(
+        """
+        <h1 style='color: red;'> 🏀 NBA Simulation Predictor
+        </h1>
+        """,
+        unsafe_allow_html=True
+    )
     st.sidebar.header("Settings")
 
     num_sims = st.sidebar.slider(
