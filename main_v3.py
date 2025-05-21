@@ -1,7 +1,10 @@
 import streamlit as st
 import pandas as pd
 from sim_core import (
-    load_team_stats, run_sim, quick_analysis
+    load_team_stats,
+    run_sim,
+    quick_analysis,
+    highlight_winners
 )
 
 
@@ -61,7 +64,9 @@ def main():
                 data=game_log,
                 columns=["Team 1 Score", "Team 2 Score", "Winner"]
             )
-            st.dataframe(df_2)
+            df_2.style.apply(highlight_winners, axis=1)
+            st.dataframe(df_2.style.apply(highlight_winners, axis=1))
+
 
             st.session_state["results"] = results
             st.session_state["game_log"] = game_log

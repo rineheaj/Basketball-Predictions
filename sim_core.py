@@ -76,3 +76,17 @@ def highest_score(game_log):
         print(f"LOG: {log}")
 
 
+def highlight_winners(row, team1, team2):
+    if row["Winner"] == team1:
+        return [
+            "background-color: lightblue"
+        ] * len(row)
+    elif row["Winner"] == team2:
+        return [
+            "background-color: lightcoral"
+        ] * len(row)
+    return [
+        "" * len(row)
+    ]
+
+
