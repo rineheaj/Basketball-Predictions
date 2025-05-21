@@ -65,7 +65,7 @@ def main():
                 columns=["Team 1 Score", "Team 2 Score", "Winner"]
             )
             df_2.style.apply(highlight_winners, axis=1)
-            st.dataframe(df_2.style.apply(highlight_winners, axis=1))
+            st.dataframe(df_2.style.apply(highlight_winners, axis=1, args=(team1, team2)))
 
 
             st.session_state["results"] = results
