@@ -23,8 +23,8 @@ def simulate_game(team1, team2, stats):
     t1_expected = (t1_stats["ppg"] + t2_stats["oppg"]) / 2
     t2_expected = (t2_stats["ppg"] + t1_stats["oppg"]) / 2
 
-    t1_score = round(random.gauss(t1_expected, 12))
-    t2_score = round(random.gauss(t2_expected, 12))
+    t1_score = round(random.gauss(t1_expected, 6))
+    t2_score = round(random.gauss(t2_expected, 6))
 
     winner = team1 if t1_score > t2_score else team2
     return winner, t1_score, t2_score
