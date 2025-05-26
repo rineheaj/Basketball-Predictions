@@ -3,18 +3,14 @@ import streamlit.components.v1 as components
 import psutil
 
 def show_system_info():
-    """
-    Gathers and displays system resource usage information using psutil.
-    """
+    
     st.write("## System Information")
     
-    # Get CPU usage percentage over a 1-second interval.
+    
     cpu_percent = psutil.cpu_percent(interval=1)
     
-    # Get virtual memory details.
     memory = psutil.virtual_memory()
     
-    # Convert memory totals to MB for easier reading.
     total_mem_mb = memory.total // (1024**2)
     used_mem_mb = memory.used // (1024**2)
     
@@ -34,7 +30,6 @@ def show_system_info_modal():
     total_mem_mb = memory.total // (1024 ** 2)
     used_mem_mb = memory.used // (1024 ** 2)
     
-    # HTML and CSS for the modal popup; adjust the width, padding, etc., as needed.
     html_content = f"""
     <html>
       <head>
@@ -98,5 +93,4 @@ def show_system_info_modal():
       </body>
     </html>
     """
-    # Embed the HTML modal in your Streamlit app.
     components.html(html_content, height=400)
