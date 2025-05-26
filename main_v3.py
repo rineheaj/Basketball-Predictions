@@ -9,7 +9,7 @@ from sim_core import (
 from team_images import show_team_bg
 
 
-opacity = 0.9
+opacity = 1.0
 
 
 
