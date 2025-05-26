@@ -91,8 +91,8 @@ def show_system_info_modal():
             <h2>System Information</h2>
             <p><strong>CPU Usage:</strong> {cpu_percent}%</p>
             <p><strong>Memory Usage:</strong> {memory.percent}%</p>
-            <p><strong>Total Memory:</strong> {total_mem_mb} MB</p>
-            <p><strong>Used Memory:</strong> {used_mem_mb} MB</p>
+            <p><strong>Total Memory:</strong> {total_mem_mb:,} MB</p>
+            <p><strong>Used Memory:</strong> {used_mem_mb:,} MB</p>
           </div>
         </div>
       </body>
