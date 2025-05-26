@@ -6,6 +6,7 @@ from sim_core import (
     quick_analysis,
     highlight_winners
 )
+from team_images import show_team_bg
 
 
 def main():
@@ -47,7 +48,7 @@ def main():
         key="team2"
     )
 
-
+    show_team_bg(team1=team1, team2=team2)
 
     if st.sidebar.button("Run Simulation"):
         with st.spinner("Running sims..."):
