@@ -16,7 +16,7 @@ opacity = 1.0
 def main():
     st.markdown(
         """
-        <h1 style='color: red;'> 🏀 NBA Simulation Predictor
+        <h1 style='color: blue;'> 🏀 NBA Simulation Predictor
         </h1>
         """,
         unsafe_allow_html=True
