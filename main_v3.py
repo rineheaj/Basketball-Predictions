@@ -7,12 +7,12 @@ from sim_core import (
     highlight_winners
 )
 from team_images import show_team_bg
-from info import show_system_info
+from info import show_system_info, show_system_info_modal
 
 opacity = 1.0
 
 if st.button("Show System Info"):
-    show_system_info()
+    show_system_info_modal()
 
 def main():
     st.markdown(
