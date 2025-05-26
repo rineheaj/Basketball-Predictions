@@ -14,7 +14,7 @@ def apply_opacity(image, opacity=0.5):
     return img
 
 
-def show_team_bg(team1: str, team2: str):
+def show_team_bg(team1: str, team2: str, opacity=0.5):
     col1, col2 = st.columns(2)
 
     try:
@@ -23,13 +23,16 @@ def show_team_bg(team1: str, team2: str):
     except (FileNotFoundError, Exception) as e:
         st.warning("Background image not found for one or both teams.")
         return
-    
+
+    img1 = apply_opacity(img1, opacity)
+    img2 = apply_opacity(img2, opacity)
+
     with col1:
         st.image(img1, use_container_width=True, caption=team1)
 
-    
     with col2:
         st.image(img2, use_container_width=True, caption=team2)
+
 
 def validate_paths(team1, team2):
     team_one_path = Path("images")  / (team1.lower() + ".jpg")
