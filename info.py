@@ -19,6 +19,6 @@ def show_system_info():
     
     st.write(f"**CPU Usage:** {cpu_percent}%")
     st.write(f"**Memory Usage:** {memory.percent}%")
-    st.write(f"**Total Memory:** {total_mem_mb} MB")
-    st.write(f"**Used Memory:** {used_mem_mb} MB")
+    st.write(f"**Total Memory:** {total_mem_mb:,} MB")
+    st.write(f"**Used Memory:** {used_mem_mb:,} MB")
     
