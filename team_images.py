@@ -8,7 +8,7 @@ def apply_opacity(image, opacity=0.5):
     An opacity of 0 means fully transparent, while 1 is fully opaque.
     """
     img = image.convert("RGBA")
-    # Calculate the new alpha value (0-255) based on the opacity with 255 being fully opaque.
+    
     alpha_value = int(255 * opacity)
     img.putalpha(alpha_value)
     return img
