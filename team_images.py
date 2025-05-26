@@ -2,7 +2,7 @@ from PIL import Image
 import streamlit as st
 from pathlib import Path
 
-def apply_opacity(image, opacity=0.5):
+def apply_opacity(image, opacity=0.9):
     """
     Converts the image to RGBA mode and applies the specified opacity.
     An opacity of 0 means fully transparent, while 1 is fully opaque.
@@ -14,7 +14,7 @@ def apply_opacity(image, opacity=0.5):
     return img
 
 
-def show_team_bg(team1: str, team2: str, opacity=0.5):
+def show_team_bg(team1: str, team2: str, opacity=0.9):
     col1, col2 = st.columns(2)
 
     try:
