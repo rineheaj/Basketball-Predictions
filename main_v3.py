@@ -7,7 +7,7 @@ from sim_core import (
     highlight_winners
 )
 from team_images import show_team_bg
-
+from info import show_system_info
 
 opacity = 1.0
 

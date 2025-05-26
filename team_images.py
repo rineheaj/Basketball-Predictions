@@ -2,6 +2,8 @@ from PIL import Image
 import streamlit as st
 from pathlib import Path
 
+
+
 def apply_opacity(image, opacity=0.9):
     """
     Converts the image to RGBA mode and applies the specified opacity.
