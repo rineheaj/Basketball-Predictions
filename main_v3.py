@@ -11,7 +11,8 @@ from info import show_system_info
 
 opacity = 1.0
 
-
+if st.button("Show System Info"):
+    show_system_info()
 
 def main():
     st.markdown(
@@ -30,6 +31,7 @@ def main():
         step=100,
         value=500
     )
+
 
     try:
         stats = load_team_stats("nba_teams_2024.csv")
