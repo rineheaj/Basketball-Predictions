@@ -21,10 +21,6 @@ def show_system_info():
 
 
 def show_system_info_modal():
-    """
-    Creates a modal popup card showing system resource usage.
-    Uses custom HTML, CSS, and a touch of JavaScript for the close behavior.
-    """
     cpu_percent = psutil.cpu_percent(interval=1)
     memory = psutil.virtual_memory()
     total_mem_mb = memory.total // (1024 ** 2)

@@ -7,9 +7,7 @@ from sim_core import (
     highlight_winners
 )
 from team_images import show_team_bg
-from info import show_system_info, show_system_info_modal
-
-opacity = 1.0
+from info import show_system_info_modal
 
 if st.button("Show System Info"):
     show_system_info_modal()
@@ -88,7 +86,7 @@ def main():
         game_log = st.session_state["game_log"]
         analysis = st.session_state["analysis"]
 
-        # Check if selected teams are in results
+        
         if team1 in results and team2 in results:
             st.subheader("Win Chance 🏆")
             st.write(
