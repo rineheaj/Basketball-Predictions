@@ -25,8 +25,8 @@ def main():
     num_sims = st.sidebar.slider(
         "Number of Simulations",
         min_value=100,
-        max_value=5000,
-        step=100,
+        max_value=50_000,
+        step=1000,
         value=500
     )
 
