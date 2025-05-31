@@ -25,14 +25,24 @@ def show_system_info_modal():
     memory = psutil.virtual_memory()
     total_mem_mb = memory.total // (1024 ** 2)
     used_mem_mb = memory.used // (1024 ** 2)
-    
+
     html_content = f"""
     <html>
       <head>
         <style>
+          @keyframes fadeIn {{
+              from {{ opacity: 0; }}
+              to {{ opacity: 1; }}
+          }}
+
+          @keyframes popUp {{
+              from {{ transform: scale(0.9); }}
+              to {{ transform: scale(1); }}
+          }}
+
           /* The Modal (background) */
           .modal {{
-            display: block; /* Show the modal */
+            display: none; /* Hidden by default */
             position: fixed;
             z-index: 1;
             left: 0;
@@ -41,9 +51,10 @@ def show_system_info_modal():
             height: 100%;
             overflow: auto;
             background-color: rgba(0,0,0,0.4);
+            animation: fadeIn 0.5s ease-in-out;
           }}
 
-          /* Modal Content/Box */
+          /* Modal Content */
           .modal-content {{
             background-color: #fefefe;
             margin: 15% auto;
@@ -52,9 +63,10 @@ def show_system_info_modal():
             width: 40%;
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            animation: popUp 0.5s ease-in-out;
           }}
 
-          /* The Close Button */
+          /* Close Button */
           .close {{
             color: #aaa;
             float: right;
@@ -70,12 +82,17 @@ def show_system_info_modal():
           }}
         </style>
         <script>
+          function showModal() {{
+              document.getElementById("modalOverlay").style.display = "block";
+          }}
+
           function closeModal() {{
-            document.getElementById("modalOverlay").style.display = "none";
+              document.getElementById("modalOverlay").style.display = "none";
           }}
         </script>
       </head>
       <body>
+        <button onclick="showModal()">Show System Info</button>
         <div id="modalOverlay" class="modal">
           <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -89,4 +106,5 @@ def show_system_info_modal():
       </body>
     </html>
     """
+    
     components.html(html_content, height=400)
