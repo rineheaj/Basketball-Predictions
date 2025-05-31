@@ -29,6 +29,20 @@ def show_system_info_modal():
     <html>
       <head>
         <style>
+          /* Neon Glow Animation */
+          @keyframes neonGlow {{
+              0% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
+              50% {{ text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }}
+              100% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
+          }}
+
+          .neon-text {{
+              font-size: 24px;
+              font-weight: bold;
+              color: white;
+              animation: neonGlow 2s infinite alternate;
+          }}
+
           /* Lava Scrollbar with Glow */
           @keyframes lavaFlow {{
               0% {{ background: linear-gradient(45deg, red, orange, yellow); }}
@@ -98,7 +112,7 @@ def show_system_info_modal():
 
           .modal-content:hover .close {{
             display: block;
-            opacity: 0.5;
+            opacity: 1;
           }}
 
           .close:hover,
@@ -107,13 +121,6 @@ def show_system_info_modal():
             text-decoration: none;
           }}
 
-          /* Neon Glowing Text */
-          .neon-text {{
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            animation: neonGlow 2s infinite alternate;
-          }}
         </style>
         <script>
           function showModal() {{
@@ -139,5 +146,5 @@ def show_system_info_modal():
       </body>
     </html>
     """
-    
+
     components.html(html_content, height=400)
