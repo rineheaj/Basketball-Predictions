@@ -65,10 +65,9 @@ def show_system_info_modal():
             background-color: black;
             color: white;
             margin: 15% auto;
-            padding: 15px;
+            padding: 20px;
             border: 1px solid #555;
-            width: auto;
-            max-width: 40%
+            width: 40%;
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
             animation: popUp 0.5s ease-in-out;
@@ -122,4 +121,4 @@ def show_system_info_modal():
     </html>
     """
     
-    components.html(html_content, height=600)
+    components.html(html_content, height=300)
