@@ -19,10 +19,6 @@ def show_system_info():
     st.write(f"**Total Memory:** {total_mem_mb:,} MB")
     st.write(f"**Used Memory:** {used_mem_mb:,} MB")
 
-import streamlit as st
-import streamlit.components.v1 as components
-import psutil
-
 def show_system_info_modal():
     cpu_percent = psutil.cpu_percent(interval=1)
     memory = psutil.virtual_memory()
@@ -55,11 +51,6 @@ def show_system_info_modal():
               100% {{ background: linear-gradient(45deg, red, orange, yellow); }}
           }}
 
-          @keyframes lavaGlow {{
-              0% {{ box-shadow: 0 0 10px rgba(255, 69, 0, 0.8); }}
-              100% {{ box-shadow: 0 0 25px rgba(255, 140, 0, 1); }}
-          }}
-
           /* Lava Scrollbar */
           ::-webkit-scrollbar {{
               width: 12px;
@@ -72,8 +63,7 @@ def show_system_info_modal():
           ::-webkit-scrollbar-thumb {{
               background: linear-gradient(45deg, red, orange, yellow);
               border-radius: 6px;
-              animation: lavaFlow 3s infinite linear, lavaGlow 1.5s infinite alternate;
-              box-shadow: 0 0 15px rgba(255, 69, 0, 0.8), 0 0 30px rgba(255, 140, 0, 0.6);
+              animation: lavaFlow 3s infinite linear;
           }}
 
           /* Modal Styling */
@@ -81,12 +71,11 @@ def show_system_info_modal():
             display: block;
             position: fixed;
             z-index: 1;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            width: auto;
-            height: auto;
-            padding: 20px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
             background-color: rgba(0,0,0,0.9);
             animation: fadeIn 0.5s ease-in-out;
           }}
@@ -95,7 +84,7 @@ def show_system_info_modal():
           .modal-content {{
             background-color: black;
             color: white;
-            margin: 0 auto;
+            margin: 10% auto;
             padding: 15px;
             border: 1px solid #555;
             width: auto;
@@ -153,4 +142,4 @@ def show_system_info_modal():
     </html>
     """
     
-    components.html(html_content, height=300)
+    components.html(html_content, height=400)
