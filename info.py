@@ -121,4 +121,4 @@ def show_system_info_modal():
     </html>
     """
     
-    components.html(html_content, height=400)
+    components.html(html_content, height=500)
