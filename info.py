@@ -40,36 +40,15 @@ def show_system_info_modal():
               to {{ transform: scale(1); }}
           }}
 
-          @keyframes melt {{
-              0% {{ transform: scaleY(1); opacity: 1; }}
-              50% {{ transform: scaleY(0.8); opacity: 0.7; }}
-              100% {{ transform: scaleY(1.2); opacity: 0.4; }}
-          }}
-
-          @keyframes lavaFlow {{
-              0% {{ background: linear-gradient(45deg, red, orange, yellow); }}
-              50% {{ background: linear-gradient(45deg, yellow, orange, red); }}
-              100% {{ background: linear-gradient(45deg, red, orange, yellow); }}
-          }}
-
-          /* Lava Scrollbar */
-          ::-webkit-scrollbar {{
-              width: 12px;
-          }}
-
-          ::-webkit-scrollbar-track {{
-              background: white;
-          }}
-
-          ::-webkit-scrollbar-thumb {{
-              background: linear-gradient(45deg, red, orange, yellow);
-              border-radius: 6px;
-              animation: lavaFlow 3s infinite linear;
+          @keyframes neonGlow {{
+              0% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
+              50% {{ text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }}
+              100% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
           }}
 
           /* Modal Styling */
           .modal {{
-            display: block;
+            display: none; /* Hidden by default */
             position: fixed;
             z-index: 1;
             left: 0;
@@ -109,13 +88,12 @@ def show_system_info_modal():
             text-decoration: none;
           }}
 
-          /* Melting Text Effect */
-          .melting-text {{
+          /* Neon Glowing Text */
+          .neon-text {{
             font-size: 24px;
             font-weight: bold;
             color: white;
-            position: relative;
-            animation: melt 3s infinite ease-in-out;
+            animation: neonGlow 2s infinite alternate;
           }}
         </style>
         <script>
@@ -132,11 +110,11 @@ def show_system_info_modal():
         <div id="modalOverlay" class="modal">
           <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <h2 class="melting-text">System Information</h2>
-            <p class="melting-text"><strong>CPU Usage:</strong> {cpu_percent}%</p>
-            <p class="melting-text"><strong>Memory Usage:</strong> {memory.percent}%</p>
-            <p class="melting-text"><strong>Total Memory:</strong> {total_mem_mb:,} MB</p>
-            <p class="melting-text"><strong>Used Memory:</strong> {used_mem_mb:,} MB</p>
+            <h2 class="neon-text">System Information</h2>
+            <p class="neon-text"><strong>CPU Usage:</strong> {cpu_percent}%</p>
+            <p class="neon-text"><strong>Memory Usage:</strong> {memory.percent}%</p>
+            <p class="neon-text"><strong>Total Memory:</strong> {total_mem_mb:,} MB</p>
+            <p class="neon-text"><strong>Used Memory:</strong> {used_mem_mb:,} MB</p>
           </div>
         </div>
       </body>
