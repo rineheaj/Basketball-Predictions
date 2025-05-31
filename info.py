@@ -29,29 +29,18 @@ def show_system_info_modal():
     <html>
       <head>
         <style>
-          @keyframes fadeIn {{
-              from {{ opacity: 0; }}
-              to {{ opacity: 1; }}
-          }}
-
-          @keyframes popUp {{
-              from {{ transform: scale(0.9); }}
-              to {{ transform: scale(1); }}
-          }}
-
-          @keyframes neonGlow {{
-              0% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
-              50% {{ text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }}
-              100% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
-          }}
-
+          /* Lava Scrollbar with Glow */
           @keyframes lavaFlow {{
               0% {{ background: linear-gradient(45deg, red, orange, yellow); }}
               50% {{ background: linear-gradient(45deg, yellow, orange, red); }}
               100% {{ background: linear-gradient(45deg, red, orange, yellow); }}
           }}
 
-          /* Lava Scrollbar */
+          @keyframes lavaGlow {{
+              0% {{ box-shadow: 0 0 10px rgba(255, 69, 0, 0.8); }}
+              100% {{ box-shadow: 0 0 25px rgba(255, 140, 0, 1); }}
+          }}
+
           ::-webkit-scrollbar {{
               width: 12px;
           }}
@@ -63,7 +52,8 @@ def show_system_info_modal():
           ::-webkit-scrollbar-thumb {{
               background: linear-gradient(45deg, red, orange, yellow);
               border-radius: 6px;
-              animation: lavaFlow 3s infinite linear;
+              animation: lavaFlow 3s infinite linear, lavaGlow 1.5s infinite alternate;
+              box-shadow: 0 0 15px rgba(255, 69, 0, 0.8), 0 0 30px rgba(255, 140, 0, 0.6);
           }}
 
           /* Modal Styling */
@@ -94,13 +84,19 @@ def show_system_info_modal():
             animation: popUp 0.5s ease-in-out;
           }}
 
-          /* Close Button */
+          /* Close Button (Hidden until hovered) */
           .close {{
             color: white;
             float: right;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+          }}
+
+          .modal-content:hover .close {{
+            opacity: 1;
           }}
 
           .close:hover,
