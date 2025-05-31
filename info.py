@@ -78,7 +78,7 @@ def show_system_info_modal():
 
           /* Modal Styling */
           .modal {{
-            display: none; /* Hidden by default */
+            display: block;
             position: fixed;
             z-index: 1;
             left: 50%;
