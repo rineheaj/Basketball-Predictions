@@ -20,6 +20,10 @@ def show_system_info():
     st.write(f"**Used Memory:** {used_mem_mb:,} MB")
 
 
+import streamlit as st
+import streamlit.components.v1 as components
+import psutil
+
 def show_system_info_modal():
     cpu_percent = psutil.cpu_percent(interval=1)
     memory = psutil.virtual_memory()
@@ -46,9 +50,30 @@ def show_system_info_modal():
               100% {{ text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff; }}
           }}
 
+          @keyframes lavaFlow {{
+              0% {{ background: linear-gradient(45deg, red, orange, yellow); }}
+              50% {{ background: linear-gradient(45deg, yellow, orange, red); }}
+              100% {{ background: linear-gradient(45deg, red, orange, yellow); }}
+          }}
+
+          /* Lava Scrollbar */
+          ::-webkit-scrollbar {{
+              width: 12px;
+          }}
+
+          ::-webkit-scrollbar-track {{
+              background: black;
+          }}
+
+          ::-webkit-scrollbar-thumb {{
+              background: linear-gradient(45deg, red, orange, yellow);
+              border-radius: 6px;
+              animation: lavaFlow 3s infinite linear;
+          }}
+
           /* Modal Styling */
           .modal {{
-            display: block;
+            display: none; /* Hidden by default */
             position: fixed;
             z-index: 1;
             left: 0;
@@ -64,10 +89,11 @@ def show_system_info_modal():
           .modal-content {{
             background-color: black;
             color: white;
-            margin: 15% auto;
-            padding: 20px;
+            margin: 10% auto;
+            padding: 15px;
             border: 1px solid #555;
-            width: 40%;
+            width: auto;
+            max-width: 40%;
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
             animation: popUp 0.5s ease-in-out;
@@ -121,4 +147,4 @@ def show_system_info_modal():
     </html>
     """
     
-    components.html(html_content, height=500)
+    components.html(html_content, height=300)
