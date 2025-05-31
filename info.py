@@ -58,7 +58,7 @@ def show_system_info_modal():
           }}
 
           ::-webkit-scrollbar-track {{
-              background: black;
+              background: white;
           }}
 
           ::-webkit-scrollbar-thumb {{
