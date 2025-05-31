@@ -65,9 +65,10 @@ def show_system_info_modal():
             background-color: black;
             color: white;
             margin: 15% auto;
-            padding: 20px;
+            padding: 15px;
             border: 1px solid #555;
-            width: 40%;
+            width: auto;
+            max-width: 40%
             border-radius: 10px;
             box-shadow: 0 4px 8px 0 rgba(255,255,255,0.2);
             animation: popUp 0.5s ease-in-out;
