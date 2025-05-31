@@ -55,7 +55,7 @@ st.markdown(
 
 def main():
     
-    st.sidebar.header("Settings")
+    st.sidebar.header("Sim Settings")
 
     num_sims = st.sidebar.slider(
         "Number of Simulations",
@@ -106,9 +106,9 @@ def main():
                 data=game_log,
                 columns=["Team 1 Score", "Team 2 Score", "Winner"]
             )
-            styled_df = df_2.style.apply(highlight_winners, axis=1, args=(team1, team2))
+            styled_df_2 = df_2.style.apply(highlight_winners, axis=1, args=(team1, team2))
 
-            st.dataframe(styled_df)
+            st.dataframe(styled_df_2)
 
 
             st.session_state["results"] = results
