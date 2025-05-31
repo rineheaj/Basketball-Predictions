@@ -113,7 +113,7 @@ def main():
 
             df_2 = pd.DataFrame(
                 data=game_log,
-                columns=["Team 1 Score", "Team 2 Score", "Winner"]
+                columns=[team1, team2, "Winner"]
             )
             styled_df_2 = df_2.style.apply(highlight_winners, axis=1, args=(team1, team2))
 
