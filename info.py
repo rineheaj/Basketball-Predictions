@@ -98,7 +98,7 @@ def show_system_info_modal():
 
           .modal-content:hover .close {{
             display: block;
-            opacity: 1;
+            opacity: 0.5;
           }}
 
           .close:hover,
