@@ -92,10 +92,12 @@ def show_system_info_modal():
             font-weight: bold;
             cursor: pointer;
             opacity: 0;
+            display: none;
             transition: opacity 0.3s ease-in-out;
           }}
 
           .modal-content:hover .close {{
+            display: block;
             opacity: 1;
           }}
 
