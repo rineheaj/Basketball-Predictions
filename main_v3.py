@@ -28,7 +28,7 @@ st.markdown(
         padding: 5px;
         margin-bottom: 20px;
         background-color: rgba(255,255,255,0.8);
-        animation: glow 3s infinite alternate;
+        animation: glow 5s infinite alternate;
     }
     </style>
     """,
