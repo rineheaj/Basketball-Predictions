@@ -19,10 +19,10 @@ st.markdown(
     .team-img-container {
         border-radius: 15px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         padding: 5px;
         margin-bottom: 20px;
         background-color: rgba(255,255,255,0.8);
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 0, 0.4);
     }
     </style>
     """,
