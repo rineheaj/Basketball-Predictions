@@ -40,7 +40,7 @@ def show_system_info_modal():
               font-size: 24px;
               font-weight: bold;
               color: white;
-              animation: neonGlow 2s infinite alternate;
+              animation: neonGlow 5s infinite alternate;
           }}
 
           /* Lava Scrollbar with Glow */
