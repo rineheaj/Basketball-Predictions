@@ -92,7 +92,6 @@ def show_system_info_modal():
         </script>
       </head>
       <body>
-        <button onclick="showModal()">Show System Info</button>
         <div id="modalOverlay" class="modal">
           <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
