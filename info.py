@@ -48,7 +48,7 @@ def show_system_info_modal():
           @keyframes lavaFlow {{
               0% {{ background: linear-gradient(45deg, red, orange, yellow); }}
               50% {{ background: linear-gradient(45deg, yellow, orange, red); }}
-              100% {{ background: linear-gradient(45deg, red, orange, yellow); }}
+              100% {{ background: linear-gradient(45deg, purple, orange, yellow); }}
           }}
 
           /* Lava Scrollbar */
