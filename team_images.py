@@ -57,7 +57,9 @@ def show_team_bg_improved(teams: List[str], start_index=0, opacity=0.9):
     cols = st.columns(2)
     for idx, (team, img) in enumerate(images_to_display):
         with cols[idx]:
+            st.markdown("<div class='team-img-container'>", unsafe_allow_html=True)
             st.image(img, use_container_width=True, caption=team)
+            st.markdown("</div>", unsafe_allow_html=True)
 
 
 

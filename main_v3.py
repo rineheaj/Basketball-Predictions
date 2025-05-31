@@ -12,14 +12,49 @@ from info import show_system_info_modal
 if st.button("Show System Info"):
     show_system_info_modal()
 
-def main():
-    st.markdown(
+
+st.markdown(
+    """
+    <style>
+    .team-img-container {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        padding: 5px;
+        margin-bottom: 20px;
+        background-color: rgba(255,255,255,0.8);
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
         """
-        <h1 style='color: blue;'> 🏀 NBA Simulation Predictor
+        <h1 style='color: blue;'> 🏀 NBA Game Winner Predictions
         </h1>
         """,
         unsafe_allow_html=True
     )
+
+
+st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+            background-size: cover;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+def main():
+    
     st.sidebar.header("Settings")
 
     num_sims = st.sidebar.slider(
@@ -44,6 +79,8 @@ def main():
         index=0,
         key="team1"
     )
+
+    
 
     team2 = st.sidebar.selectbox(
         "Select Team 2",
