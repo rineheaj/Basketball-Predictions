@@ -73,9 +73,8 @@ def show_system_info_modal():
             z-index: 1;
             left: 0;
             top: 0;
-            width: auto;
-            height: auto;
-            padding: 20px;
+            width: 100%;
+            height: 100%;
             overflow: auto;
             background-color: rgba(0,0,0,0.9);
             animation: fadeIn 0.5s ease-in-out;
