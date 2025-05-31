@@ -17,11 +17,11 @@ st.markdown(
     """
     <style>
     @keyframes glow {
-        0% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.6), 0 0 45px rgba(255, 0, 0, 0.4); } /* Red */
-        25% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6), 0 0 45px rgba(0, 255, 0, 0.4); } /* Green */
-        50% { box-shadow: 0 0 15px rgba(0, 0, 255, 0.8), 0 0 30px rgba(0, 0, 255, 0.6), 0 0 45px rgba(0, 0, 255, 0.4); } /* Blue */
-        75% { box-shadow: 0 0 15px rgba(255, 165, 0, 0.8), 0 0 30px rgba(255, 165, 0, 0.6), 0 0 45px rgba(255, 165, 0, 0.4); } /* Orange */
-        100% { box-shadow: 0 0 15px rgba(128, 0, 128, 0.8), 0 0 30px rgba(128, 0, 128, 0.6), 0 0 45px rgba(128, 0, 128, 0.4); } /* Purple */
+        0% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.6), 0 0 45px rgba(255, 0, 0, 0.4); }
+        25% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6), 0 0 45px rgba(0, 255, 0, 0.4); }
+        50% { box-shadow: 0 0 15px rgba(0, 0, 255, 0.8), 0 0 30px rgba(0, 0, 255, 0.6), 0 0 45px rgba(0, 0, 255, 0.4); }
+        75% { box-shadow: 0 0 15px rgba(255, 165, 0, 0.8), 0 0 30px rgba(255, 165, 0, 0.6), 0 0 45px rgba(255, 165, 0, 0.4); }
+        100% { box-shadow: 0 0 15px rgba(128, 0, 128, 0.8), 0 0 30px rgba(128, 0, 128, 0.6), 0 0 45px rgba(128, 0, 128, 0.4); }
     }
 
     .team-img-container {
@@ -89,7 +89,7 @@ def main():
         key="team1"
     )
 
-    
+
 
     team2 = st.sidebar.selectbox(
         "Select Team 2",
