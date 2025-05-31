@@ -42,7 +42,7 @@ def show_system_info_modal():
 
           /* The Modal (background) */
           .modal {{
-            display: block; /* Hidden by default */
+            display: block;
             position: fixed;
             z-index: 1;
             left: 0;
@@ -56,7 +56,8 @@ def show_system_info_modal():
 
           /* Modal Content */
           .modal-content {{
-            background-color: #fefefe;
+            background-color: black;
+            color: white;
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
