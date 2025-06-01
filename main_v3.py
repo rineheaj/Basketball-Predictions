@@ -43,7 +43,7 @@ st.markdown(
     <h1 style="
         color: white;
         background: linear-gradient(to right, #1E90FF, #FFD700);
-        text-allign: center;
+        text-align: center;
         padding: 10px;
         border-radius: 10px;
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
