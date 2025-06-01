@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from sim_core import (
-    load_team_stats,
+    load_team_stats_improved,
     run_sim,
     quick_analysis,
     highlight_winners
@@ -39,12 +39,21 @@ st.markdown(
 
 
 st.markdown(
-        """
-        <h1 style='color: blue;'> 🏀 NBA Game Winner Predictions
-        </h1>
-        """,
-        unsafe_allow_html=True
-    )
+    """
+    <h1 style="
+        color: white;
+        background: linear-gradient(to right, #1E90FF, #FFD700);
+        text-allign: center;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        font-family: 'Arial', sans-serif;
+    ">
+        🏀 NBA Game Winner Predictions
+    </h1>
+    """,
+    unsafe_allow_html=True
+)
 
 
 st.markdown(
@@ -76,7 +85,7 @@ def main():
 
 
     try:
-        stats = load_team_stats("nba_teams_2024.csv")
+        stats = load_team_stats_improved("nba_teams_2024.csv")
     except Exception as e:
         st.error(f"Error loading team stats: {e}")
         return

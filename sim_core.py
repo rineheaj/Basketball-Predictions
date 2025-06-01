@@ -1,7 +1,10 @@
 import csv
 import random
+import streamlit as st
+from decors import depricated
 
 
+@depricated
 def load_team_stats(filename):
     stats = {}
 
@@ -14,6 +17,24 @@ def load_team_stats(filename):
             }
 
     return stats
+
+
+def load_team_stats_improved(filename):
+    with open(filename, mode="r", newline="") as infile:
+        reader = csv.DictReader(infile)
+
+        stats = {
+            row["Team"]: {"ppg": float(row["PPG"]), "oppg": float(row["OPPG"])}
+            for row in reader
+        }
+
+    # for team in stats:
+    #     st.write(
+    #         f"{team} on average score {stats[team]['ppg']} and give up {stats[team]['oppg']}."
+    #     )
+
+    return stats
+
 
 
 def simulate_game(team1, team2, stats):
@@ -71,6 +92,7 @@ def quick_analysis(game_log, team1, team2):
         "close_games": close_games,
     }
 
+@depricated
 def highest_score(game_log):
     for log in game_log:
         print(f"LOG: {log}")
