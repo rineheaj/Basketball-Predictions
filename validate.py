@@ -9,7 +9,7 @@ from pathlib import Path
 console = Console()
 
 def load_validate_csv_teams(filename: str):
-    missing_data = []
+    # missing_data = []
 
     file_path = Path(filename)
 
