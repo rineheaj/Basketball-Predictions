@@ -1,16 +1,14 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import psutil
+import decors
 
+@decors.depricated
 def show_system_info():
-    
     st.write("## System Information")
-    
-    
     cpu_percent = psutil.cpu_percent(interval=1)
-    
     memory = psutil.virtual_memory()
-    
+  
     total_mem_mb = memory.total // (1024**2)
     used_mem_mb = memory.used // (1024**2)
     
@@ -18,6 +16,7 @@ def show_system_info():
     st.write(f"**Memory Usage:** {memory.percent}%")
     st.write(f"**Total Memory:** {total_mem_mb:,} MB")
     st.write(f"**Used Memory:** {used_mem_mb:,} MB")
+
 
 def show_system_info_modal():
     cpu_percent = psutil.cpu_percent(interval=1)
