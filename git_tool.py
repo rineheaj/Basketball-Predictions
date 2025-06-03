@@ -1,6 +1,6 @@
 import subprocess
 import webbrowser
-
+from sys import exit
 
 def run_hell(cmd):
     print(f"\nRunning command: {cmd}")
@@ -8,13 +8,35 @@ def run_hell(cmd):
         print(f"Command failed with exit code: {result.returncode}.\nBye for now.")
         exit(1)
 
+def handle_commit():
+    run_hell("git status")
+    if not (commit_message := input("Enter commit message: ").strip()):
+        print("Commit message cannot be empty, bye for now.")
+        exit(1)
+    run_hell("git add .")
+    run_hell(f'git commit -m "{commit_message}"')
 
 
+def non_empty(message):
+    while not (value := input(message).strip()):
+        print("Input cannot be empty, please try that again.")
+    return value
 
 def yes_no(msg):
     while (ans := input(f"{msg} (y/n)").strip().lower()) not in ("y", "n"):
         print("Oops, please enter y or n")
     return ans == "y"
+
+def maybe_open_pr(branch_name, push_branch):
+    if branch_name and push_branch:
+        if yes_no("Open PR? "):
+            github_user = "rineheaj"
+            repo_name = "Basketball-Predictions"
+            pr_url = f"https://github.com/{github_user}/{repo_name}/pull/new/{branch_name}"
+            print(f"Opening {pr_url}")
+            webbrowser.open(pr_url)
+        else:
+            print(f"Skipped opening PR page.")
 
 
 def main():
@@ -34,27 +56,14 @@ def main():
 
     create_branch = yes_no("Create and switch to a new branch? ")
     if create_branch:
-        branch_name = input("Enter a new branch name: ").strip()
-        if branch_name == "":
-            print(f"Branch name cannot be empty, bye for now.")
-            exit(1)
+        branch_name = non_empty("Enter a new branch name: ")
         run_hell(f"git checkout -b {branch_name}")
     else:
         branch_name = None
 
 
-    commit_changes = yes_no("Do you want to commit changes now? ")
-    if commit_changes:
-        run_hell("git status")
-
-        commit_message = input("Enter commit message: ").strip()
-        if commit_message == "":
-            print("Commit message cannot be empty, bye for now.")
-            exit(1)
-        
-
-        run_hell("git add .")
-        run_hell(f'git commit -m "{commit_message}"')
+    if yes_no("Do you want to commit changes now? "):
+        handle_commit()
     else:
         print("Skipping commit step.")
     
@@ -64,21 +73,9 @@ def main():
         run_hell(f"git push origin {branch_to_push}")
     else:
         print("Skipping push, your changes are only local.")
-    
 
-    if branch_name and push_branch:
-        open_pr = yes_no("Open GitHub Pull Request page in broswer?")
-        if open_pr:
-            github_user = "rineheaj"
-            repo_name = "Basketball-Predictions"
-            pr_url = f"https://github.com/{github_user}/{repo_name}/pull/new/{branch_name}"
-            print(f"Opening {pr_url}")
-            webbrowser.open(pr_url)
-        else:
-            print(f"Skipped opening PR page.")
-    
+    maybe_open_pr(branch_name, push_branch)
     print("\nNice one!")
-
 
 
 if __name__ == "__main__":
