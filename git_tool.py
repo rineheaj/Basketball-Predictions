@@ -11,15 +11,13 @@ def run_shell(cmd):
 
 
 def yes_no(message):
-    while True:
-        ans = input(f"{message} (y/n): ").strip().lower()
-        if ans in ["y", "n"]:
-            return ans == "y"
-        print("Oops, please enter y or n .")
+    while (ans := input(f"{message} (y/n)").strip().lower()) not in ("y", "n"):
+        print("Oops, please enter y or n")
+    return ans == "y"
 
 
 def main():
-    print("=== Git Helper Script=== ")
+    print("=== Git Helper ===")
 
     if yes_no("Switch to 'main' branch?"):
         run_shell("git checkout main")
@@ -33,7 +31,7 @@ def main():
         print("Skipping Git pull, local 'main' might be outdated.")
     
 
-    create_branch = yes_no("Create and switch to a new branch.")
+    create_branch = yes_no("Create and switch to a new branch? ")
     if create_branch:
         branch_name = input("Enter a new branch name: ").strip()
         if branch_name == "":
@@ -44,7 +42,7 @@ def main():
         branch_name = None
 
 
-    commit_changes = yes_no("Do you want to commit changes now?")
+    commit_changes = yes_no("Do you want to commit changes now? ")
     if commit_changes:
         run_shell("git status")
 
@@ -59,10 +57,9 @@ def main():
     else:
         print("Skipping commit step.")
     
-
-    push_branch = yes_no(f"Push branch {'main' if branch_name is not None else branch_name} to origin?")
+    branch_to_push = branch_name if branch_name is not None else "main"
+    push_branch = yes_no(f"Push branch {branch_to_push} to origin?")
     if push_branch:
-        branch_to_push = branch_name if branch_name else "main"
         run_shell(f"git push origin {branch_to_push}")
     else:
         print("Skipping push, your changes are only local.")
