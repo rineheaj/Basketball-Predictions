@@ -17,8 +17,8 @@ def handle_commit():
     run_hell(f'git commit -m "{commit_message}"')
 
 
-def non_empty(message):
-    while not (value := input(message).strip()):
+def non_empty(msg):
+    while not (value := input(msg).strip()):
         print("Input cannot be empty, please try that again.")
     return value
 
