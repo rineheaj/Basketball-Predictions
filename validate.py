@@ -9,8 +9,6 @@ from pathlib import Path
 console = Console()
 
 def load_validate_csv_teams(filename: str):
-    # missing_data = []
-
     file_path = Path(filename)
 
     if file_path.exists() and file_path.is_file() and file_path.suffix == ".csv":
