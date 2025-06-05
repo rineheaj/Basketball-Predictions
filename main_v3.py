@@ -4,10 +4,13 @@ from sim_core import (
     load_team_stats_improved,
     run_sim,
     quick_analysis,
-    highlight_winners
+    highlight_winners,
+    lem_highlight_winners
 )
 from team_images import show_team_bg_improved
 from info import show_system_info_modal
+
+
 
 if st.button("Show System Info"):
     show_system_info_modal()
@@ -68,7 +71,35 @@ st.markdown(
         </style>
         """,
         unsafe_allow_html=True
-    )
+)
+
+
+st.markdown(
+    """
+    <style>
+    @keyframes glow-line {
+        0% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.9); }
+        25% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.9); }
+        50% { box-shadow: 0 0 15px rgba(0, 0, 255, 0.9); }
+        75% { box-shadow: 0 0 15px rgba(255, 165, 0, 0.9); }
+        100% { box-shadow: 0 0 15px rgba(128, 0, 128, 0.9); }
+    }
+
+    .glow-divider {
+        width: 100%;
+        height: 6px;
+        margin: 20px 0;
+        background-color: white;
+        border-radius: 5px;
+        animation: glow-line 2.5s infinite alternate;
+    }
+    </style>
+
+    <div class="glow-divider"></div>
+    """,
+    unsafe_allow_html=True
+)
+
 
 
 def main():
@@ -124,7 +155,25 @@ def main():
                 data=game_log,
                 columns=[team1, team2, "Winner"]
             )
-            styled_df_2 = df_2.style.apply(highlight_winners, axis=1, args=(team1, team2))
+            styled_df_2 = (
+                df_2.style
+                    .apply(highlight_winners, axis=1, args=(team1, team2))
+                    .background_gradient(subset=[team1, team2], cmap="coolwarm")
+                    .set_properties(**{"text-align": "center", "font-size": "14px"})
+                    .set_table_styles(
+                        [{
+                            "selector": "th",
+                            "props": [
+                                ("background-color", "#f7f7f9"),
+                                ("color", "#333"),
+                                ("font-size", "16px"),
+                                ("border", "1px solid #ccc"),
+                                ("text-align", "center"),
+                                ("padding", "8px")
+                            ]
+                        }]
+                    )
+            )
 
             st.dataframe(styled_df_2)
 
@@ -143,41 +192,40 @@ def main():
 
         
         if team1 in results and team2 in results:
-            st.subheader("Win Chance 🏆")
-            st.write(
-                f"{team1} Win Chance: {results.get(team1, 0) / num_sims * 100:.1f}%"
-            )
-            st.write(
-                f"{team2} Win Chance: {results.get(team2, 0) / num_sims * 100:.1f}%"
-            )
+            st.markdown("<h3 style='text-align: center;'/style>🏆 Win Chance", unsafe_allow_html=True)
+            st.markdown("<div class='glow-divider'></div>", unsafe_allow_html=True)
+            
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric(label=f"{team1} Win Chance", value=f"{results.get(team1, 0) / num_sims * 100:.1f}%", border=True)
+            with col2:
+                st.metric(label=f"{team2} Win Chance", value=f"{results.get(team2, 0) / num_sims * 100:.1f}%", border=True)
 
-            st.subheader("🧾Average Scores & Insights")
-            st.write(
-                f"Average {team1} Score: {analysis['avg_scores'].get(team1, 0):.1f}"
-            )
-            st.write(
-                f"Average {team2} Score: {analysis['avg_scores'].get(team2, 0):.1f}"
-            )
-            st.write(
-                f"Average Point Differential: {analysis.get('point_diff', 0):.1f}"
-            )
-            st.write(
-                f"Close Games (<=5 points): {analysis.get('close_games', 0)}"
-            )
+            
+            st.markdown("<div class='glow-divider'></div>", unsafe_allow_html=True)
+            st.subheader("📊 Average Scores & Insights")
+            st.markdown("<div class='glow-divider'></div>", unsafe_allow_html=True)
 
-            st.subheader("📊Score Distribution")
-            df = pd.DataFrame(
-                {
-                    f"{team1} Score": [log[0] for log in game_log],
-                    f"{team2} Score": [log[1] for log in game_log]
-                }
-            )
-            st.bar_chart(
-                df,
-                x_label="Number of Sims",
-                y_label="Total Points Scored",
-                use_container_width=True
-            )
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric(label=f"Avg {team1} Score", value=f"{analysis['avg_scores'].get(team1, 0):.1f}", border=True)
+            with col2:
+                st.metric(label=f"Avg {team2} Score", value=f"{analysis['avg_scores'].get(team2, 0):.1f}", border=True)
+            with col3:
+                st.metric(label="Avg Point Differential", value=f"{analysis.get('point_diff', 0):.1f}", border=True)
+
+            
+            st.metric(label="Close Games (≤5 points)", value=analysis.get("close_games", 0), border=True)
+
+            st.markdown("<div class='glow-divider'></div>", unsafe_allow_html=True)
+
+
+            df = pd.DataFrame({
+                f"{team1} Score": [log[0] for log in game_log],
+                f"{team2} Score": [log[1] for log in game_log]
+            })
+            st.bar_chart(df, x_label="Number of Sims", y_label="Total Points Scored", use_container_width=True)
         else:
             st.warning("Please re-run the simulation after changing teams.")
 

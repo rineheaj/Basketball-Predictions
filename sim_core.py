@@ -112,3 +112,9 @@ def highlight_winners(row, team1, team2):
     ]
 
 
+def lem_highlight_winners(row, team1, team2):
+    if row["Winner"] == team1:
+        return ["background-color: limegreen; font-weight: bold; color: white"] * len(row)
+    elif row["Winner"] == team2:
+        return ["background-color: tomato; font-weight: bold; color: white"] * len(row)
+    return [""] * len(row)
