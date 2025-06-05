@@ -10,9 +10,7 @@ class TestMaybeOpenPR(unittest.TestCase):
         branch_name = "test-branch"
         push_branch = True
         expected_url = f"https://github.com/rineheaj/Basketball-Predictions/pull/new/{branch_name}".lower()
-
         maybe_open_pr(branch_name, push_branch)
-
         mock_web_open.assert_called_once_with(expected_url)
 
 if __name__ == "__main__":
