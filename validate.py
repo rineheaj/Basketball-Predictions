@@ -13,22 +13,13 @@ def load_validate_csv_teams(filename: str):
 
     file_path = Path(filename)
 
-    if file_path.exists():
+    if file_path.exists() and file_path.is_file() and file_path.suffix == ".csv":
         with file_path.open(mode="r", newline="") as csv_file:
             reader = csv.DictReader(csv_file)
-
-            # for row in reader:
-            #     team_name = row.get("Team", "Team went on vacation!")
-            #     for col, value in row.items():
-            #         if value is None or value.strip() =="":
-            #             missing_data.append((filename, team_name, col))
-
 
             missing_data_comp = [
                 (file_path.name, row.get("Model", "No Car"), col) for row in reader for col, value in row.items() if not value or not value.strip()
             ]
-            
-
 
 
     if missing_data_comp:
@@ -47,7 +38,6 @@ def load_validate_csv_teams(filename: str):
 
 
 if __name__ == "__main__":
-    
     load_validate_csv_teams(
         filename="Electric_Vehicle_Population_Data.csv"
     )
