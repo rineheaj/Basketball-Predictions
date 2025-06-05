@@ -1,13 +1,16 @@
 import subprocess
 import webbrowser
 from sys import exit
+from typing import NamedTuple
 
+class GitHubSettings(NamedTuple):
+    username: str
+    repo_name: str
 
-
-git_hub_settings = {
-    "username": "rineheaj",
-    "repo_name": "basketball-predictions",
-}
+gh_settings = GitHubSettings(
+    username="rineheaj".lower(),
+    repo_name="basketball-predictions".lower()
+)
 
 def run_hell(cmd):
     print(f"\nRunning command: {cmd}")
@@ -35,7 +38,7 @@ def yes_no(msg):
     return ans == "y"
 
 def maybe_open_pr(branch_name, push_branch):
-    if branch_name and push_branch and (pr_url := f"https://github.com/{git_hub_settings['username']}/{git_hub_settings['repo_name']}/pull/new/{branch_name}"):
+    if branch_name and push_branch and (pr_url := f"https://github.com/{gh_settings.username}/{gh_settings.repo_name}/pull/new/{branch_name}"):
         if yes_no("Open PR? "):
             print(f"Opening {pr_url}")
             webbrowser.open(pr_url)
