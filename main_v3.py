@@ -4,8 +4,7 @@ from sim_core import (
     load_team_stats_improved,
     run_sim,
     quick_analysis,
-    highlight_winners,
-    lem_highlight_winners
+    highlight_winners
 )
 from team_images import show_team_bg_improved
 from info import show_system_info_modal
@@ -60,7 +59,7 @@ st.markdown(
 
 
 st.markdown(
-        f"""
+        """
         <style>
         .stApp {{
             background: 
