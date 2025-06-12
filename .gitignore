@@ -5,3 +5,4 @@ git_tool.ps1
 network_scanners/
 git_tool.py
 test_git_tool.py
+__pycache__/
