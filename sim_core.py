@@ -1,7 +1,8 @@
 import csv
 import random
-import streamlit as st
 from decors import depricated
+import streamlit as st
+import pandas as pd
 
 
 @depricated
@@ -118,3 +119,56 @@ def lem_highlight_winners(row, team1, team2):
     elif row["Winner"] == team2:
         return ["background-color: tomato; font-weight: bold; color: white"] * len(row)
     return [""] * len(row)
+
+
+def get_team_stats():
+    try:
+        return load_team_stats_improved("nba_teams_2024.csv")
+    except Exception as e:
+        st.error(f"Error loading team stats: {e}")
+        return None
+
+
+def execute_simulation(team1, team2, stats, num_sims):
+    with st.spinner("Running sims..."):
+        results, game_log = run_sim(team1, team2, stats, num_sims)
+        analysis = quick_analysis(game_log=game_log, team1=team1, team2=team2)
+    return results, game_log, analysis
+
+
+
+
+
+def render_simulation_metrics(team1, team2, num_sims, analysis, results, game_log):
+    if team1 in results and team2 in results:
+        st.markdown('<h3 style="text-align: center;">🏆 Win Chance</h3>', unsafe_allow_html=True)
+        st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.metric(label=f"{team1} Win Chance", value=f"{results.get(team1, 0) / num_sims * 100:.1f}%", border=True)
+        with col2:
+            st.metric(label=f"{team2} Win Chance", value=f"{results.get(team2, 0) / num_sims * 100:.1f}%", border=True)
+    
+        st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
+        st.subheader("📊 Average Scores & Insights")
+        st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
+    
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric(label=f"Avg {team1} Score", value=f"{analysis['avg_scores'].get(team1, 0):.1f}", border=True)
+        with col2:
+            st.metric(label=f"Avg {team2} Score", value=f"{analysis['avg_scores'].get(team2, 0):.1f}", border=True)
+        with col3:
+            st.metric(label="Avg Point Differential", value=f"{analysis.get('point_diff', 0):.1f}", border=True)
+    
+        st.metric(label="Close Games (≤5 points)", value=f'{analysis.get("close_games", 0):,}', border=True)
+        st.markdown('<div class="glow-divider"></div>', unsafe_allow_html=True)
+    
+        df_scores = pd.DataFrame({
+            f"{team1} Score": [log[0] for log in game_log],
+            f"{team2} Score": [log[1] for log in game_log]
+        })
+        st.bar_chart(df_scores, x_label="Number of Sims", y_label="Total Points Scored", use_container_width=True)
+    else:
+        st.warning("Please re-run the simulation after changing teams.")

@@ -6,3 +6,4 @@ network_scanners/
 git_tool.py
 test_git_tool.py
 __pycache__/
+main_v3.py
