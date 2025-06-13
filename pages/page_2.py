@@ -19,7 +19,6 @@ def render_hacker_simulation():
             height: 100vh;
             background: radial-gradient(circle, #000, #06111c);
             font-family: 'Courier New', monospace;
-            color: #00FF00;
             overflow: hidden;
           }
           .terminal {
@@ -38,10 +37,14 @@ def render_hacker_simulation():
           }
           .command {
             font-weight: bold;
+            color: #00FF00; /* Luminous green for commands */
+            text-shadow: 0 0 5px #00FF00;
           }
           .output {
             margin-left: 20px;
             white-space: pre-wrap;
+            color: #39FF14; /* Neon green for outputs */
+            text-shadow: 0 0 5px #39FF14;
           }
           .btn {
             display: block;
@@ -111,7 +114,7 @@ def render_hacker_simulation():
                         terminal.scrollTop = terminal.scrollHeight;
                         i++;
                         runNext();
-                    }, 3000);
+                    }, 1500);
                  } else {
                     var doneLine = document.createElement('div');
                     doneLine.classList.add('command-line');
