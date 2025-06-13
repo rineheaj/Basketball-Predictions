@@ -91,7 +91,7 @@ def render_crazy_test_page():
               box.innerHTML = messages[randomIndex];
               count++;
               if(count < 8) {
-                setTimeout(updateMessage, 700);
+                setTimeout(updateMessage, 1000);
               } else {
                 box.innerHTML = "Hacker mode deactivated.";
                 button.disabled = false;
