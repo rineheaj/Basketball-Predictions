@@ -7,86 +7,89 @@ def render_crazy_test_page():
       <head>
         <style>
           body {
-            background: radial-gradient(circle, #ff6b6b, #f06595);
+            background: linear-gradient(135deg, #000000, #006400);
             font-family: 'Courier New', Courier, monospace;
-            color: white;
+            color: #00FF00;
             text-align: center;
             padding-top: 50px;
           }
           .crazy-box {
-            width: 150px;
+            width: 300px;
             height: 150px;
-            background: linear-gradient(45deg, #fab1a0, #ff7675);
-            animation: spin 3s linear infinite, pulse 2s ease-in-out infinite;
-            border-radius: 20px;
+            background: linear-gradient(135deg, #000000, #006400);
+            border: 2px dashed #00FF00;
+            border-radius: 10px;
             margin: 0 auto;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-          }
-          @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-          }
-          @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+            padding: 20px;
+            box-shadow: 0 0 20px #00FF00;
+            overflow: hidden;
           }
           .crazy-text {
-            margin-top: 30px;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: bold;
-            animation: colorchange 4s infinite;
+            animation: flicker 1.5s infinite alternate;
           }
-          @keyframes colorchange {
-            0% { color: #ffeaa7; }
-            25% { color: #fd79a8; }
-            50% { color: #74b9ff; }
-            75% { color: #55efc4; }
-            100% { color: #ffeaa7; }
+          @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
           }
           .crazy-btn {
             margin-top: 40px;
             padding: 10px 20px;
             font-size: 18px;
             border: none;
-            background-color: #00b894;
-            color: white;
+            background-color: #00FF00;
+            color: #000000;
             border-radius: 10px;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
           }
           .crazy-btn:hover {
-            background-color: #019875;
+            background-color: #90EE90;
           }
         </style>
       </head>
       <body>
-        <div class="crazy-box"></div>
-        <div class="crazy-text">Welcome to the Crazy Test Page!</div>
-        <button class="crazy-btn" id="crazyBtn">Click Me!</button>
+        <div class="crazy-box" id="crazyBox">
+          <div class="crazy-text" id="crazyText">Hacker mode inactive.</div>
+        </div>
+        <button class="crazy-btn" id="crazyBtn">Activate Hacker Mode</button>
         <script>
           document.getElementById("crazyBtn").addEventListener("click", function(){
-            let count = 0;
-            const button = this;
-            button.disabled = true; // Disable the button during the alert cycle
-
-            function crazyAlert() {
+            var messages = [
+              "Accessing mainframe...",
+              "Bypassing firewall...",
+              "Decrypting data streams...",
+              "Injecting code...",
+              "Compiling virus payload...",
+              "Overriding security protocols...",
+              "Hacker mode active!",
+              "System breach complete."
+            ];
+            var count = 0;
+            var box = document.getElementById("crazyText");
+            var button = document.getElementById("crazyBtn");
+            button.disabled = true;
+            
+            function updateMessage() {
+              var randomIndex = Math.floor(Math.random() * messages.length);
+              box.innerHTML = messages[randomIndex];
               count++;
-              if (count <= 3) {
-                alert("You clicked " + count + " time" + (count > 1 ? "s" : "") + "! Stay crazy!");
-                setTimeout(crazyAlert, 500);
+              if(count < 8) {
+                setTimeout(updateMessage, 700);
               } else {
-                alert("Enough crazy clicks!");
-                button.disabled = false; // Re-enable the button after finishing
+                box.innerHTML = "Hacker mode deactivated.";
+                button.disabled = false;
               }
             }
-            crazyAlert();
+            updateMessage();
           });
         </script>
       </body>
     </html>
     """
-    components.html(crazy_html, height=500)
+    components.html(crazy_html, height=400)
 
 if __name__ == "__main__":
     render_crazy_test_page()
