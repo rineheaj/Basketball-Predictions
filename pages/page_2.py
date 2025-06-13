@@ -111,7 +111,7 @@ def render_hacker_simulation():
                         terminal.scrollTop = terminal.scrollHeight;
                         i++;
                         runNext();
-                    }, 1500);
+                    }, 3000);
                  } else {
                     var doneLine = document.createElement('div');
                     doneLine.classList.add('command-line');
