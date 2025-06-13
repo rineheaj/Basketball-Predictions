@@ -43,7 +43,7 @@ def render_hacker_simulation():
           .output {
             margin-left: 20px;
             white-space: pre-wrap;
-            color: #39FF14; /* Neon green for outputs */
+            color: #FFA500; /* Neon green for outputs */
             text-shadow: 0 0 5px #39FF14;
           }
           .btn {
