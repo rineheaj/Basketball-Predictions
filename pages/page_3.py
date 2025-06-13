@@ -1,11 +1,10 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-
 st.set_page_config(layout="wide")
 
-def render_crazy_test_page():
-    crazy_html = """
+def render_interactive_hacker_page():
+    html_code = """
     <html>
       <head>
         <style>
@@ -20,91 +19,88 @@ def render_crazy_test_page():
             background: linear-gradient(135deg, #000000, #006400);
             font-family: 'Courier New', Courier, monospace;
             color: #00FF00;
-            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-          }
-          .crazy-box {
-            width: 50vw;
-            height: 30vh;
-            background: linear-gradient(135deg, #000000, #006400);
-            border: 2px dashed #00FF00;
-            border-radius: 10px;
-            margin: 0 auto;
-            padding: 20px;
-            box-shadow: 0 0 20px #00FF00;
-            overflow: hidden;
-            display: flex;
             align-items: center;
             justify-content: center;
           }
-          .crazy-text {
-            font-size: 1.5vw;
-            font-weight: bold;
-            animation: flicker 1.5s infinite alternate;
+          #terminal {
+            width: 80vw;
+            height: 60vh;
+            background: #000;
+            border: 2px solid #00FF00;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 1.2rem;
           }
-          @keyframes flicker {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+          #commandInput {
+            width: 80vw;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            background: #222;
+            color: #00FF00;
+            border: 1px solid #00FF00;
           }
-          .crazy-btn {
-            margin-top: 40px;
+          #sendBtn {
             padding: 10px 20px;
-            font-size: 1.5vw;
+            margin-top: 10px;
+            background: #00FF00;
+            color: #000;
             border: none;
-            background-color: #00FF00;
-            color: #000000;
-            border-radius: 10px;
+            font-size: 1.2rem;
+            border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
           }
-          .crazy-btn:hover {
-            background-color: #90EE90;
+          #sendBtn:hover {
+            background: #90EE90;
           }
         </style>
       </head>
       <body>
-        <div class="crazy-box" id="crazyBox">
-          <div class="crazy-text" id="crazyText">Hacker mode inactive.</div>
-        </div>
-        <button class="crazy-btn" id="crazyBtn">Activate Hacker Mode</button>
+        <div id="terminal">Welcome, hacker. Type a command below...</div>
+        <input type="text" id="commandInput" placeholder="Enter command..." autofocus />
+        <button id="sendBtn">Send Command</button>
         <script>
-          document.getElementById("crazyBtn").addEventListener("click", function(){
-            var messages = [
-              "Accessing mainframe...",
-              "Bypassing firewall...",
-              "Decrypting data streams...",
-              "Injecting code...",
-              "Compiling virus payload...",
-              "Overriding security protocols...",
-              "Hacker mode active!",
-              "System breach complete."
-            ];
-            var count = 0;
-            var box = document.getElementById("crazyText");
-            var button = document.getElementById("crazyBtn");
-            button.disabled = true;
-            
-            function updateMessage() {
-              var randomIndex = Math.floor(Math.random() * messages.length);
-              box.innerHTML = messages[randomIndex];
-              count++;
-              if(count < 8) {
-                setTimeout(updateMessage, 700);
+          const terminal = document.getElementById("terminal");
+          const commandInput = document.getElementById("commandInput");
+          const sendBtn = document.getElementById("sendBtn");
+
+          const commands = {
+            "help": "Available commands: help, scan, breach, shutdown.",
+            "scan": "Scanning network... Found open ports: 22, 80, 443.",
+            "breach": "Security breach initiated. Access granted.",
+            "shutdown": "Shutting down target system..."
+          };
+
+          function appendToTerminal(text) {
+            terminal.innerHTML += "<br>" + text;
+            terminal.scrollTop = terminal.scrollHeight;
+          }
+
+          sendBtn.addEventListener("click", function() {
+            var inputText = commandInput.value.trim().toLowerCase();
+            if (inputText) {
+              appendToTerminal("> " + inputText);
+              if (commands[inputText]) {
+                appendToTerminal(commands[inputText]);
               } else {
-                box.innerHTML = "Hacker mode deactivated.";
-                button.disabled = false;
+                appendToTerminal("Unknown command: " + inputText);
               }
+              commandInput.value = "";
             }
-            updateMessage();
+          });
+
+          commandInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+              sendBtn.click();
+            }
           });
         </script>
       </body>
     </html>
     """
-    components.html(crazy_html, height=800, width=0)
-    
-if __name__ == "__main__":
-    render_crazy_test_page()
+    components.html(html_code, width=0, height=700)
+
+if __name__ == '__main__':
+    render_interactive_hacker_page()
