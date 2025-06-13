@@ -1,109 +1,134 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.set_page_config(layout="wide")  # Make the app use full screen width
+# Use the full width of the page
+st.set_page_config(layout="wide")
 
-def render_crazy_test_page():
-    crazy_html = """
+def render_hacker_simulation():
+    hacker_html = """
+    <!DOCTYPE html>
     <html>
       <head>
+        <meta charset="UTF-8">
+        <title>Hacker Simulation Terminal</title>
         <style>
           html, body {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100vh;
-            overflow: hidden;
-          }
-          body {
-            background: linear-gradient(135deg, #000000, #006400);
-            font-family: 'Courier New', Courier, monospace;
+            background: radial-gradient(circle, #000, #06111c);
+            font-family: 'Courier New', monospace;
             color: #00FF00;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-          }
-          .crazy-box {
-            width: 50vw;
-            height: 30vh;
-            background: linear-gradient(135deg, #000000, #006400);
-            border: 2px dashed #00FF00;
-            border-radius: 10px;
-            margin: 0 auto;
-            padding: 20px;
-            box-shadow: 0 0 20px #00FF00;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
           }
-          .crazy-text {
-            font-size: 1.5vw;
-            font-weight: bold;
-            animation: flicker 1.5s infinite alternate;
-          }
-          @keyframes flicker {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
-          }
-          .crazy-btn {
-            margin-top: 40px;
-            padding: 10px 20px;
-            font-size: 1.5vw;
-            border: none;
-            background-color: #00FF00;
-            color: #000000;
+          .terminal {
+            margin: 20px auto;
+            width: 90%;
+            height: 80vh;
+            background-color: rgba(0,0,0,0.85);
+            padding: 20px;
             border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+            box-shadow: 0 0 20px #00FF00;
           }
-          .crazy-btn:hover {
+          .command-line {
+            margin: 5px 0;
+            white-space: pre-wrap;
+          }
+          .command {
+            font-weight: bold;
+          }
+          .output {
+            margin-left: 20px;
+            white-space: pre-wrap;
+          }
+          .btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #00FF00;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+          }
+          .btn:hover {
             background-color: #90EE90;
           }
         </style>
       </head>
       <body>
-        <div class="crazy-box" id="crazyBox">
-          <div class="crazy-text" id="crazyText">Hacker mode inactive.</div>
+        <div class="terminal" id="terminal">
+          <!-- Terminal content will be injected here -->
         </div>
-        <button class="crazy-btn" id="crazyBtn">Activate Hacker Mode</button>
+        <button class="btn" id="runCommands">Run Simulation</button>
         <script>
-          document.getElementById("crazyBtn").addEventListener("click", function(){
-            var messages = [
-              "Accessing mainframe...",
-              "Bypassing firewall...",
-              "Decrypting data streams...",
-              "Injecting code...",
-              "Compiling virus payload...",
-              "Overriding security protocols...",
-              "Hacker mode active!",
-              "System breach complete."
-            ];
-            var count = 0;
-            var box = document.getElementById("crazyText");
-            var button = document.getElementById("crazyBtn");
-            button.disabled = true;
-            
-            function updateMessage() {
-              var randomIndex = Math.floor(Math.random() * messages.length);
-              box.innerHTML = messages[randomIndex];
-              count++;
-              if(count < 8) {
-                setTimeout(updateMessage, 1000);
-              } else {
-                box.innerHTML = "Hacker mode deactivated.";
-                button.disabled = false;
+          document.getElementById("runCommands").addEventListener("click", function(){
+              var terminal = document.getElementById("terminal");
+              terminal.innerHTML = "";  // Clear previous output
+
+              var commands = [
+                {
+                  cmd: "echo 'Initializing system scan...'",
+                  output: "[OK] System scan initialized."
+                },
+                {
+                  cmd: "nmap -v localhost",
+                  output: "Starting Nmap 7.80 ( https://nmap.org )\\nNmap scan report for localhost (127.0.0.1)\\nHost is up (0.00012s latency).\\nNot shown: 995 closed ports\\nPORT     STATE SERVICE\\n22/tcp   open  ssh\\n80/tcp   open  http\\n443/tcp  open  https"
+                },
+                {
+                  cmd: "ping -c 3 8.8.8.8",
+                  output: "PING 8.8.8.8 (8.8.8.8): 56 data bytes\\n64 bytes from 8.8.8.8: icmp_seq=0 ttl=115 time=14.2 ms\\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=13.9 ms\\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=13.7 ms\\n\\n--- 8.8.8.8 ping statistics ---\\n3 packets transmitted, 3 received, 0% packet loss, time 2003ms"
+                },
+                {
+                  cmd: "ifconfig",
+                  output: "eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500\\n    inet 192.168.1.101  netmask 255.255.255.0  broadcast 192.168.1.255\\n    inet6 fe80::f816:3eff:fe20:57c4  prefixlen 64  scopeid 0x20<link>\\n    ether fa:16:3e:20:57:c4  txqueuelen 1000  (Ethernet)"
+                },
+                {
+                  cmd: "cat /var/log/syslog | grep error",
+                  output: "Jun 12 22:30:01 localhost kernel: [0.000000] ACPI: Error: [ECR1] Method parse/execution failed\\nJun 12 22:30:05 localhost systemd[1]: Failed to start LSB: AppArmor initialization."
+                }
+              ];
+
+              var i = 0;
+              function runNext() {
+                 if (i < commands.length) {
+                    // Create and display the command line
+                    var cmdLine = document.createElement('div');
+                    cmdLine.classList.add('command-line');
+                    cmdLine.innerHTML = `<span class="command">> ${commands[i].cmd}</span>`;
+                    terminal.appendChild(cmdLine);
+                    
+                    // Wait before showing output
+                    setTimeout(function(){
+                        var outLine = document.createElement('pre');
+                        outLine.classList.add('output');
+                        outLine.textContent = commands[i].output;
+                        terminal.appendChild(outLine);
+                        terminal.scrollTop = terminal.scrollHeight;
+                        i++;
+                        runNext();
+                    }, 1500);
+                 } else {
+                    var doneLine = document.createElement('div');
+                    doneLine.classList.add('command-line');
+                    doneLine.innerHTML = "<span class='command'>[Simulation Complete]</span>";
+                    terminal.appendChild(doneLine);
+                    document.getElementById("runCommands").disabled = false;
+                 }
               }
-            }
-            updateMessage();
+              document.getElementById("runCommands").disabled = true;
+              runNext();
           });
         </script>
       </body>
     </html>
     """
-    components.html(crazy_html, height=800, width=0)
-    
+    # Inject the HTML into the Streamlit app.
+    components.html(hacker_html, height=800, width=0)
+
 if __name__ == "__main__":
-    render_crazy_test_page()
+    render_hacker_simulation()
