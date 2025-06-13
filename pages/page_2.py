@@ -1,5 +1,95 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
+def render_crazy_test_page():
+    crazy_html = """
+    <html>
+      <head>
+        <style>
+          body {
+            background: linear-gradient(135deg, #000000, #006400);
+            font-family: 'Courier New', Courier, monospace;
+            color: #00FF00;
+            text-align: center;
+            padding-top: 50px;
+          }
+          .crazy-box {
+            width: 300px;
+            height: 150px;
+            background: linear-gradient(135deg, #000000, #006400);
+            border: 2px dashed #00FF00;
+            border-radius: 10px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 20px #00FF00;
+            overflow: hidden;
+          }
+          .crazy-text {
+            font-size: 18px;
+            font-weight: bold;
+            animation: flicker 1.5s infinite alternate;
+          }
+          @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+          }
+          .crazy-btn {
+            margin-top: 40px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: #00FF00;
+            color: #000000;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+          }
+          .crazy-btn:hover {
+            background-color: #90EE90;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="crazy-box" id="crazyBox">
+          <div class="crazy-text" id="crazyText">Hacker mode inactive.</div>
+        </div>
+        <button class="crazy-btn" id="crazyBtn">Activate Hacker Mode</button>
+        <script>
+          document.getElementById("crazyBtn").addEventListener("click", function(){
+            var messages = [
+              "Accessing mainframe...",
+              "Bypassing firewall...",
+              "Decrypting data streams...",
+              "Injecting code...",
+              "Compiling virus payload...",
+              "Overriding security protocols...",
+              "Hacker mode active!",
+              "System breach complete."
+            ];
+            var count = 0;
+            var box = document.getElementById("crazyText");
+            var button = document.getElementById("crazyBtn");
+            button.disabled = true;
+            
+            function updateMessage() {
+              var randomIndex = Math.floor(Math.random() * messages.length);
+              box.innerHTML = messages[randomIndex];
+              count++;
+              if(count < 8) {
+                setTimeout(updateMessage, 700);
+              } else {
+                box.innerHTML = "Hacker mode deactivated.";
+                button.disabled = false;
+              }
+            }
+            updateMessage();
+          });
+        </script>
+      </body>
+    </html>
+    """
+    components.html(crazy_html, height=400)
 
-
-st.title("I hope this works.")
+if __name__ == "__main__":
+    render_crazy_test_page()
