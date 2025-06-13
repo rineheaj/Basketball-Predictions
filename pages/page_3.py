@@ -1,6 +1,9 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+
+st.set_page_config(layout="wide")
+
 def render_crazy_test_page():
     crazy_html = """
     <html>
