@@ -67,14 +67,18 @@ def render_crazy_test_page():
         <script>
           document.getElementById("crazyBtn").addEventListener("click", function(){
             let count = 0;
+            const button = this;
+            button.disabled = true; // Disable the button during the alert cycle
+
             function crazyAlert() {
-                count++;
-                if (count <= 3) {
-                    alert("You clicked " + count + " time" + (count > 1 ? "s" : "") + "! Stay crazy!");
-                    setTimeout(crazyAlert, 500);
-                } else {
-                    alert("Enough crazy clicks!");
-                }
+              count++;
+              if (count <= 3) {
+                alert("You clicked " + count + " time" + (count > 1 ? "s" : "") + "! Stay crazy!");
+                setTimeout(crazyAlert, 500);
+              } else {
+                alert("Enough crazy clicks!");
+                button.disabled = false; // Re-enable the button after finishing
+              }
             }
             crazyAlert();
           });
@@ -86,6 +90,3 @@ def render_crazy_test_page():
 
 if __name__ == "__main__":
     render_crazy_test_page()
-
-
-
