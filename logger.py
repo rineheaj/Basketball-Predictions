@@ -1,4 +1,3 @@
-# logger.py
 from rich.table import Table
 from rich.console import Console
 from rich import box
@@ -30,3 +29,6 @@ def log_simulations(team1, team2, game_log, limit=10):
         )
 
     console.print(table)
+
+
+
