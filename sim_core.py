@@ -3,7 +3,7 @@ import random
 from decors import depricated
 import streamlit as st
 import pandas as pd
-
+from typing import Optional, Any
 
 @depricated
 def load_team_stats(filename):
@@ -20,11 +20,11 @@ def load_team_stats(filename):
     return stats
 
 
-def load_team_stats_improved(filename):
+def load_team_stats_improved(filename: str) -> dict[str, dict[str, float]]:
     with open(filename, mode="r", newline="") as infile:
         reader = csv.DictReader(infile)
 
-        stats = {
+        stats: csv.DictReader = {
             row["Team"]: {"ppg": float(row["PPG"]), "oppg": float(row["OPPG"])}
             for row in reader
         }
@@ -38,7 +38,7 @@ def load_team_stats_improved(filename):
 
 
 
-def simulate_game(team1, team2, stats):
+def simulate_game(team1: str, team2: str, stats: dict) -> tuple[str, int, int]:
     t1_stats = stats[team1]
     t2_stats = stats[team2]
 
@@ -52,7 +52,7 @@ def simulate_game(team1, team2, stats):
     return winner, t1_score, t2_score
 
 
-def run_sim(team1, team2, stats, num_sims=1000):
+def run_sim(team1: str, team2: str, stats: dict, num_sims: int =1000) -> tuple[dict[str, int], list[tuple[int, int, str]]]:
     results = {team1: 0, team2: 0}
     game_log = []
 
@@ -66,7 +66,7 @@ def run_sim(team1, team2, stats, num_sims=1000):
     return results, game_log
 
 
-def quick_analysis(game_log, team1, team2):
+def quick_analysis(game_log: list[tuple], team1: str, team2: str) -> dict[str, Any]:
     total_t1 = sum(
         t1 for t1, _, _ in game_log
     )
@@ -99,7 +99,7 @@ def highest_score(game_log):
         print(f"LOG: {log}")
 
 
-def highlight_winners(row, team1, team2):
+def highlight_winners(row: dict, team1: str, team2: str) -> list[str]:
     if row["Winner"] == team1:
         return [
             "background-color: lightblue"
@@ -113,7 +113,7 @@ def highlight_winners(row, team1, team2):
     ]
 
 
-def lem_highlight_winners(row, team1, team2):
+def lem_highlight_winners(row: dict, team1: str, team2: str) -> Optional[list[str]]:
     if row["Winner"] == team1:
         return ["background-color: limegreen; font-weight: bold; color: white"] * len(row)
     elif row["Winner"] == team2:
@@ -121,7 +121,7 @@ def lem_highlight_winners(row, team1, team2):
     return [""] * len(row)
 
 
-def get_team_stats():
+def get_team_stats() -> Optional[dict[str, dict[str, float]]]:
     try:
         return load_team_stats_improved("nba_teams_2024.csv")
     except Exception as e:
@@ -129,7 +129,7 @@ def get_team_stats():
         return None
 
 
-def execute_simulation(team1, team2, stats, num_sims):
+def execute_simulation(team1: str, team2: str, stats: dict, num_sims: int) -> tuple[dict[str, int], list[int, int, str], dict[str, Any]]:
     with st.spinner("Running sims..."):
         results, game_log = run_sim(team1, team2, stats, num_sims)
         analysis = quick_analysis(game_log=game_log, team1=team1, team2=team2)
